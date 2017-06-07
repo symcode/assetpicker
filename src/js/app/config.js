@@ -25,12 +25,13 @@ module.exports = {
         extensions: []
     },
     language: 'auto',
-    debug: false,
+    debug: true,
     adapters: {
         github: 'adapter/github.js',
         entermediadb: 'adapter/entermediadb.js',
         googledrive: 'adapter/googledrive.js',
-        dummy: 'adapter/dummy.js'
+        dummy: 'adapter/dummy.js',
+        symcodecloud: 'adapter/symcodecloud.js'
     },
     // Way to deliver thumbnails in picked assets:
     // 'url' for the url to the thumbnail
