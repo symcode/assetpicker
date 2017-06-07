@@ -122,7 +122,7 @@ module.exports = {
                             extension: ext,
                             created: this.parseDate(asset.created_at),
                             modified: this.parseDate(asset.changed_at),
-                            thumbnail: asset.media_thumb_url,
+                            thumbnail: asset.media_thumb_url.replace('.png', '.jpeg')+'?width=150px',
                             links: {
                                 open: asset.media_thumb_url+'?width=800px',
                                 download: asset.media_file_url
