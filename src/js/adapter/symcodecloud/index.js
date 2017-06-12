@@ -105,7 +105,6 @@ module.exports = {
                 '/entries?page='+ (result.page + 1)+'&limit=20&filter[categories]='+categories+'&filter[fulltext]='+fulltext,
                 {'headers': {'apikey': this.apikey}}
             ).then((function(response) {
-                console.debug(response);
                 if (result.items.query === query) {
                     result.page = parseInt(response.data.current_page);
                     result.pages = parseInt(response.data.page_count);
@@ -137,8 +136,8 @@ module.exports = {
         },
         setupLogin: function(loginCallback) {
             var that = this;
-            this.login(function(username, password, callback) {
-                this.http.get('/login?username='+username+'&password='+password).then(
+            var loginFunc = function(username, password, callback){
+                that.http.get('/login?username='+username+'&password='+password).then(
                     function (response) {
                         if(response.status === 200){
                             response.data = response.json();
@@ -147,14 +146,29 @@ module.exports = {
                                 callback(true);
                                 loginCallback(response.data.apikey);
                             } else {
+                                // invalid auth data, remove it to prevent endless loops
+                                that.config.cliUsername = null;
+                                that.config.cliPassword = null;
                                 callback(false);
                             }
                         } else {
+                            // invalid auth data, remove it to prevent endless loops
+                            that.config.cliUsername = null;
+                            that.config.cliPassword = null;
                             callback(false);
                         }
                     }
                 );
-            }).bind(this);
+            };
+
+            if(this.config.cliUsername && this.config.cliPassword){
+                loginFunc(this.config.cliUsername, this.config.cliPassword, function(){});
+            } else {
+                this.login(function(username, password, callback) {
+                    loginFunc(this.config.cliUsername, this.config.cliPassword, callback);
+                }).bind(this);
+            }
+
         },
         loadCategories: function(tree) {
             var catId = 0;
