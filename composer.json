@@ -1,5 +1,5 @@
 {
-    "name": "netresearch/assetpicker",
+    "name": "symcode/nrc-assetpicker",
     "description": "A free asset or file picker with abstraction layer allowing several adapters like GitHub, EnterMediaDB, Amazon S3, Google Drive, Dropbox etc.",
     "type": "library",
     "authors": [
