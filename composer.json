@@ -1,11 +1,15 @@
 {
     "name": "symcode/nrc-assetpicker",
-    "description": "A free asset or file picker with abstraction layer allowing several adapters like GitHub, EnterMediaDB, Amazon S3, Google Drive, Dropbox etc.",
+    "description": "Modified Version of [AssetPicker](https://github.com/netresearch/assetpicker) to implement the Symcode Cloud Adapter",
     "type": "library",
     "authors": [
         {
             "name": "Christian Opitz",
             "email": "christian.opitz@netresearch.de"
+        },
+        {
+            "name": "Christian Wielath",
+            "email": "wielath@symcode.de"
         }
     ],
     "license": "MIT",
